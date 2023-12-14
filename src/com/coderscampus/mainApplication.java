@@ -1,14 +1,32 @@
 package com.coderscampus;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class mainApplication {
 
 	public static void main(String[] args) {
-		
+
 		try {
 			Student[] knownUsers = Reader.readStudentsFromFile();
-			System.out.println(knownUsers);
+			Student[] compSciStudents = StudentService.listCompSciStudents(knownUsers);
+			Student[] appliedMathsSciStudents = StudentService.listAppliedMathsStudents(knownUsers);
+			Student[] statStudents = StudentService.listStatStudents(knownUsers);
+
+			// the assignment asked for figuring out how to handle null entries.
+			// I looked for it and found this Comparators.nullsLast function :
+
+			Comparator<Student> gradeComparator = Comparator.comparing(Student::getGrade, Comparator.nullsLast(Comparator.reverseOrder()));
+
+			Arrays.sort(compSciStudents, gradeComparator);
+			Arrays.sort(appliedMathsSciStudents, gradeComparator);
+			Arrays.sort(statStudents, gradeComparator);
+
+			Writer.writeStudentsToCSV(compSciStudents, "course1.csv");
+			Writer.writeStudentsToCSV(appliedMathsSciStudents, "course2.csv");
+			Writer.writeStudentsToCSV(statStudents, "course3.csv");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
