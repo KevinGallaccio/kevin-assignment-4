@@ -13,54 +13,20 @@ public class StudentService {
 		return student;
 	}
 
-	public static Student[] listCompSciStudents(Student[] studentList) {
+	public static Student[] listStudentsByCourse(Student[] studentList, String CourseID) {
 		int count = 0;
 		for (Student student : studentList) {
-			if (student != null && student.getCourseID().startsWith("COMP")) {
+			if (student != null && student.getCourseID().startsWith(CourseID)) {
 				count++;
 			}
 		}
-		Student[] compSciStudentsArray = new Student[count];
+		Student[] studentsByCourseIDArray = new Student[count];
 		int index = 0;
 		for (Student student : studentList) {
-			if (student != null && student.getCourseID().startsWith("COMP")) {
-				compSciStudentsArray[index++] = student;
+			if (student != null && student.getCourseID().startsWith(CourseID)) {
+				studentsByCourseIDArray[index++] = student;
 			}
 		}
-		return compSciStudentsArray;
-	}
-
-	public static Student[] listAppliedMathsStudents(Student[] studentList) {
-		int count = 0;
-		for (Student student : studentList) {
-			if (student != null && student.getCourseID().startsWith("APMT")) {
-				count++;
-			}
-		}
-		Student[] appliedMathsStudentsArray = new Student[count];
-		int index = 0;
-		for (Student student : studentList) {
-			if (student != null && student.getCourseID().startsWith("APMT")) {
-				appliedMathsStudentsArray[index++] = student;
-			}
-		}
-		return appliedMathsStudentsArray;
-	}
-
-	public static Student[] listStatStudents(Student[] studentList) {
-		int count = 0;
-		for (Student student : studentList) {
-			if (student != null && student.getCourseID().startsWith("STAT")) {
-				count++;
-			}
-		}
-		Student[] statStudentsArray = new Student[count];
-		int index = 0;
-		for (Student student : studentList) {
-			if (student != null && student.getCourseID().startsWith("STAT")) {
-				statStudentsArray[index++] = student;
-			}
-		}
-		return statStudentsArray;
+		return studentsByCourseIDArray;
 	}
 }

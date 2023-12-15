@@ -10,9 +10,9 @@ public class mainApplication {
 
 		try {
 			Student[] knownUsers = Reader.readStudentsFromFile();
-			Student[] compSciStudents = StudentService.listCompSciStudents(knownUsers);
-			Student[] appliedMathsSciStudents = StudentService.listAppliedMathsStudents(knownUsers);
-			Student[] statStudents = StudentService.listStatStudents(knownUsers);
+			Student[] compSciStudents = StudentService.listStudentsByCourse(knownUsers, "COMP");
+			Student[] appliedMathsSciStudents = StudentService.listStudentsByCourse(knownUsers, "APMT");
+			Student[] statStudents = StudentService.listStudentsByCourse(knownUsers, "STAT");
 
 			// the assignment asked for figuring out how to handle null entries.
 			// I looked for it and found this Comparators.nullsLast function :
